@@ -11,6 +11,7 @@ class Database(object):
 
     @staticmethod
     def insert(collection, data):
+        # data must be dictionary
         Database.DATABASE[collection].insert(data)
 
     @staticmethod

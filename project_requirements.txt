@@ -4,7 +4,7 @@ PROJECT REQUIREMENTS
 POST
 create user
 
-/user
+/users
 GET
 
 /payment

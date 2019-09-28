@@ -22,9 +22,11 @@ class UserRegister(Resource):
         if UserModel.find_by_username(data["username"]):
             return {"message": "A user with that username is already exist"}, 400
 
-        user = UserModel(**data)
+        user = UserModel(**data) # (data["username"],data["password"]) 
         user.save_to_db()
 
         return {"message": "User created succesfully"} , 201
     
-    
+class Users(Resource):
+    def get(self):
+        return {"users" : [user.json() for user in UserModel.query.all()] }

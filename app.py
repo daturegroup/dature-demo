@@ -1,11 +1,11 @@
 from flask import Flask 
 from flask_restful import Api ,Resource
 
-from resources.user import UserRegister
+from resources.user import UserRegister, Users
 from resources.sensor import SensorRegister
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:umut@127.0.0.1:5432/trial_database"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:1234@127.0.0.1:5432/trial_database"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'umut'
 api = Api(app)
@@ -24,9 +24,11 @@ class Home(Resource):
 
 # http://127.0.0.1:5000 
 api.add_resource(Home, '/') 
-
+# Post and add postgres to user and password
 api.add_resource(UserRegister, "/signin")
-
+# Postgre list all users
+api.add_resource(Users,"/users")
+# Mongodb List all collection values 
 api.add_resource(SensorRegister, "/sensor")
 
 # If the debug flag is 'True' set the server 
