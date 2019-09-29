@@ -5,8 +5,9 @@ from db import Database
 
 
 class SensorRegister(Resource):
-
+    
     parser = reqparse.RequestParser()
+    
     parser.add_argument("sensor_id",
         type = int,
         required = True,
@@ -17,6 +18,7 @@ class SensorRegister(Resource):
         required = True,
         help = "This field can not be left blank"
     )
+    
     parser.add_argument("temperature",
         type =int,
         required = True,
@@ -25,6 +27,7 @@ class SensorRegister(Resource):
     
     def get(self):
         return jsonify({"Sensor Values": SensorModel.get_all()})
+    
     
     def post(self):
         data = SensorRegister.parser.parse_args()
@@ -68,7 +71,12 @@ class Sensors(Resource):
             return jsonify({"data":SensorModel.find_by_id(sensor_id)})
         else:
             return {"message":"data by sensor by id : {} is not found".format(sensor_id)}
-    
 
+    # Konuşulcak    
+    def put(self):
+        pass
 
+    # Konuşulcak
+    def delete(self):
+        pass 
 

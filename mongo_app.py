@@ -1,9 +1,12 @@
-from models.sensor import Sensor
+from models.sensor import SensorModel
 from database import Database
 
-sensor1 = Sensor(1 ,20 ,34)
 
 Database.initialize()
-
+sensor1 = SensorModel(101 ,100 ,100)
 sensor1.save_to_mongo()
+
+for i in Database.find("sensor_trial",{"id" : 101}):
+    print(i)
+
 

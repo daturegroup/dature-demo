@@ -10,7 +10,7 @@ class UserModel(db.Model):
     # farm_type = db.Column(db.String(80))
     # location = db.Column(db.String(80))
     
-    
+
 
     def __init__(self, username, password):
         self.username = username
@@ -24,6 +24,15 @@ class UserModel(db.Model):
 
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+
+    # parametreler **kwargs olarak düzenlenip genelleştirilecek / update_to_db olmalı
+    def update_password(self, new_password):
+        self.password = new_password
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
 
     @classmethod

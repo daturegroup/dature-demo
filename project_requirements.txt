@@ -1,43 +1,32 @@
 PROJECT REQUIREMENTS
 
-/signin
+/user
 POST
 create user
+PUT
+update user
+DELETE
+delete user
+
 
 /users
 GET
-
-/payment
-GET
-
-/field/<user_id>
-GET
--------------------------------
-[OPTIONAL]
-/login
-POST
-create acces_token
-
-/logout
-POST
-dead acces_token
--------------------------------
-
 return user list
-DELETE
-delete user
 
 /sensors
 GET
 return all sensor values
+
+/sensor
+GET
 
 /sensor/<id>
 GET
 return specific sensor value
 POST
 send value to mongodb
-UPDATE
-DELETE
+
+
 
 POSTGRESQL CONNECTION STRING
 
