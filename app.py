@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_restful import Api ,Resource
 
-from resources.user import UserRegister, Users
-from resources.sensor import SensorRegister, Sensors
+from resources.user import UserRegister, Users ,SensorInformation
+from resources.sensor import SensorRegister, Sensors 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+psycopg2://postgres:1234@127.0.0.1:5432/trial_database"
@@ -25,6 +25,8 @@ class Home(Resource):
 api.add_resource(Home, '/') 
 # Post and add postgres to user and password
 api.add_resource(UserRegister, "/user")
+# Post and add postgres to sensor information  
+api.add_resource(SensorInformation, "/user/sensor")  
 # Postgre list all users / get
 api.add_resource(Users,"/users")
 # Mongodb insert sensor values / post

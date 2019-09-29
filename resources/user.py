@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse 
-from models.user import UserModel
+from models.user import UserModel, SensorInformationModel
 
 class UserRegister(Resource):
     
@@ -54,6 +54,29 @@ class UserRegister(Resource):
 
 class Users(Resource):
     def get(self):
-        return {"users" : [user.json() for user in UserModel.query.all()] }
+        return {"users" : [user.json() for user in UserModel.query.all()]}
     
+class SensorInformation(Resource):
 
+    parser = reqparse.RequestParser()
+    parser.add_argument("username",
+        type = str,
+        required = True,
+        help = "This field can not be left blank"
+    )
+    parser.add_argument("password",
+        type =str,
+        required = True,
+        help = "This field can not be left blank"
+    )
+
+    def post(self):
+        data = SensorInformation.parser.parse_args()
+        if not UserModel.find_by_credentials(data["username"],data["password"]):
+            return {"message": "Wrong username or password"}, 400
+
+        current_user = UserModel.find_by_credentials(data["username"],data["password"])
+
+        new_sensor = SensorInformationModel(user_id = current_user._id)
+        new_sensor.save_to_db()
+        return new_sensor.get_device_id(jsonify = True)
