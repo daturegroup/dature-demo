@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse 
-from models.user import UserModel, SensorInformationModel
+from models.user import UserModel, SensorInformationModel , FieldInformationModel
 
 class UserRegister(Resource):
     
@@ -52,6 +52,7 @@ class UserRegister(Resource):
             return {"message" : "Some errors occured"}
 
 
+
 class Users(Resource):
     def get(self):
         return {"users" : [user.json() for user in UserModel.query.all()]}
@@ -69,6 +70,12 @@ class SensorInformation(Resource):
         required = True,
         help = "This field can not be left blank"
     )
+    parser.add_argument("sensor_type",
+        type = str,
+        required = True,
+        help = "This field can not be left blank"
+    )
+    
 
     def post(self):
         data = SensorInformation.parser.parse_args()
@@ -77,6 +84,38 @@ class SensorInformation(Resource):
 
         current_user = UserModel.find_by_credentials(data["username"],data["password"])
 
-        new_sensor = SensorInformationModel(user_id = current_user._id)
+        new_sensor = SensorInformationModel(user_id = current_user._id , sensor_type = data["sensor_type"])
         new_sensor.save_to_db()
         return new_sensor.get_device_id(jsonify = True)
+
+
+class FieldInformation(Resource):
+
+    parser = reqparse.RequestParser()
+    parser.add_argument("username",
+        type = str,
+        required = True,
+        help = "This field can not be left blank"
+    )
+    parser.add_argument("password",
+        type =str,
+        required = True,
+        help = "This field can not be left blank"
+    )
+    parser.add_argument("field_name",
+        type = str,
+        required = True,
+        help = "This field can not be left blank"
+    )
+    
+
+    def post(self):
+        data = FieldInformation.parser.parse_args()
+        if not UserModel.find_by_credentials(data["username"],data["password"]):
+            return {"message": "Wrong username or password"}, 400
+
+        current_user = UserModel.find_by_credentials(data["username"],data["password"])
+
+        new_sensor = FieldInformationModel(user_id = current_user._id , field_name = data["field_name"])
+        new_sensor.save_to_db()
+        return {"message" : "Created successfully."} , 201

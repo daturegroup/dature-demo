@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api ,Resource
 
-from resources.user import UserRegister, Users ,SensorInformation
+from resources.user import UserRegister, Users ,SensorInformation , FieldInformation
 from resources.sensor import SensorRegister, Sensors 
 
 app = Flask(__name__)
@@ -27,14 +27,18 @@ api.add_resource(Home, '/')
 api.add_resource(UserRegister, "/user")
 # Post and add postgres to sensor information  
 api.add_resource(SensorInformation, "/user/sensor")  
-# Postgre list all users / get
+#Post and add postrgres to field information
+api.add_resource(FieldInformation, "/user/field")
+# Postgre list all users /get
 api.add_resource(Users,"/users")
 # Mongodb insert sensor values / post
 # Mongodb List all collection values /get
-api.add_resource(SensorRegister, "/sensors")                             
+api.add_resource(SensorRegister, "/sensors")                      
 # For collect wemos data from specific id /post
 # return specific id's sensor datas /get
 api.add_resource(Sensors, "/sensor/<int:sensor_id>")
+
+
 
 
 # If the debug flag is 'True' set the server 
