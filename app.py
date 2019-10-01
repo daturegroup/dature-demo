@@ -24,10 +24,13 @@ class Home(Resource):
 # http://127.0.0.1:5000 
 api.add_resource(Home, '/') 
 # Post and add postgres to user and password
+# Put and Delete Methods
 api.add_resource(UserRegister, "/user")
-# Post and add postgres to sensor information  
+# Post and add postgres to sensor information
+# Put Method  
 api.add_resource(SensorInformation, "/user/sensor")  
 #Post and add postrgres to field information
+#Delete
 api.add_resource(FieldInformation, "/user/field")
 # Postgre list all users /get
 api.add_resource(Users,"/users")
