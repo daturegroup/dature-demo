@@ -89,6 +89,8 @@ class FieldInformationModel(db.Model):
         return cls.query.filter_by(user_id = user_id , field_name = field_name ).first()
 
 
+
+
 class SensorInformationModel(db.Model):
     __tablename__ = "sensors_info"
 
@@ -125,7 +127,7 @@ class SensorInformationModel(db.Model):
         if jsonify :
             return {"sensor_unique_id":str(self.user_id) + "0" + str(self._id)} 
         else:
-            return str(self.user_id) + "0" + str(self._id)
+            return str(self.user_id) + "*" + str(self._id)
 
     @classmethod
     def find_by_user_id_and_sensor_type(cls, user_id , sensor_type):

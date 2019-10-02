@@ -1,4 +1,8 @@
-PROJECT REQUIREMENTS
+PROJECT REQUIREMENTS / DOC
+
+- Bu dökümantasyon ayrıntılı hale getirilip tamamlanacak.
+- api lere güvenlik eklenecek
+- Son değerlendirme yapılacak tüm kullanıcı deneyimine göre konsept testleri yapılacak.
 
 /user
 POST
@@ -8,6 +12,17 @@ update user
 DELETE
 delete user
 
+/user/sensor
+POST
+return wemos-id
+PUT
+return update field where sensor is moved
+
+/user/field
+POST
+create field for user
+DELETE
+delete field for user
 
 /users
 GET
@@ -17,14 +32,13 @@ return user list
 GET
 return all sensor values
 
-/sensor
-GET
-
+# id unique sensor id <userid-sensor_id>
 /sensor/<id>
 GET
 return specific sensor value
 POST
 send value to mongodb
+
 
 
 

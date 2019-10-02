@@ -39,7 +39,7 @@ api.add_resource(Users,"/users")
 api.add_resource(SensorRegister, "/sensors")                      
 # For collect wemos data from specific id /post
 # return specific id's sensor datas /get
-api.add_resource(Sensors, "/sensor/<int:sensor_id>")
+api.add_resource(Sensors, "/sensor/<string:sensor_id>")
 
 
 

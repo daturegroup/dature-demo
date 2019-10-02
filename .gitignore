@@ -1,0 +1,4 @@
+*.pyc
+/models/__pycache__
+/resource/__pycache__
+/__pycache__
